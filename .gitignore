@@ -1,0 +1,18 @@
+*.launch
+*.orig
+*.bak
+*.html
+*.png
+.vscode/
+**/build/
+**/GNU ARM v*
+**/.cproject
+**/.project
+**/.projectlinkstore
+**/.settings
+**/.makefile
+**/.trash
+**/.pdm
+**/.uceditor
+**/autogen/*.crc 
+**/__pycache__
