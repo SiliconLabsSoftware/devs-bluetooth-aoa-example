@@ -26,6 +26,8 @@ jobs:
           # the below token should have repo scope and must be manually added by you in the repository's secret
           # This token is required only if you have configured to store the signatures in a remote repository/organization
           PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          EMAIL: ${{ github.event.inputs.email }}
+
         with:
           path-to-signatures: 'cla_signatures_db.json'
           path-to-document: 'cla.md'
