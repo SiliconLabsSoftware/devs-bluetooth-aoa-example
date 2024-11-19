@@ -32,7 +32,7 @@ jobs:
           path-to-signatures: 'cla_signatures_db.json'
           path-to-document: 'cla.md'
           # branch should not be protected
-          branch: 'main'
+          branch: 'test'
           allowlist: user1,bot*
           # the followings are the optional inputs - If the optional inputs are not given, then default values will be taken
           remote-organization-name: 'SiliconLabsWorkflows'
