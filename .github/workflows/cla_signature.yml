@@ -28,7 +28,7 @@ jobs:
           echo "SIGNATURE_HAPPENED=true" >> $GITHUB_ENV
       - name: "CLA Assistant"
         if: github.event.comment.body == 'recheck' || env.SIGNATURE_HAPPENED == 'true' || github.event_name == 'pull_request_target'
-        uses: contributor-assistant/github-action@v2.6.1
+        uses: SiliconLabsWorkflows/cla-assistant@silabs_flavour
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # the below token should have repo scope and must be manually added by you in the repository's secret
