@@ -1,0 +1,21 @@
+on:
+    issue_comment:
+        types: [created]
+#Create a variable which is accessible for outher workflows
+env:
+    SIGNATURE_COMMENT: "I have read the CLA Document and I hereby sign the CLA"
+    
+jobs:
+    CLA_precheck:
+        runs-on: ubuntu-latest
+            #check if the comment is a signature
+        steps:
+            - name: Check if the comment is a signature
+              run: |
+                echo "Checking if the comment is a signature"
+                if [[ ${{ github.event.comment.body }} == "I have read the CLA Document and I hereby sign the CLA" ]]; then
+                  echo "Signature found"
+                else
+                  echo "Signature not found"
+                  exit 1
+                fi

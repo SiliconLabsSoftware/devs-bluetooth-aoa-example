@@ -13,32 +13,42 @@ permissions:
   contents: read # this can be 'read' if the signatures are in remote repository
   pull-requests: write
   statuses: write
-
+env:
+  SIGNATURE_COMMENT: "I have read the CLA Document and I hereby sign the CLA with the following email address: "
+  SIGNATURE_HAPPENED: "false"
 jobs:
   CLAAssistant:
     runs-on: ubuntu-latest
     steps:
+      - name: "signature check"
+        if: contains(github.event.comment.body, env.SIGNATURE_COMMENT)
+           #set the SIGNATURE_HAPPENED variable to true
+        run: |
+          echo "Signature found"
+          echo "SIGNATURE_HAPPENED=true" >> $GITHUB_ENV
       - name: "CLA Assistant"
-        if: (github.event.comment.body == 'recheck' || github.event.comment.body == 'I have read the CLA Document and I hereby sign the CLA') || github.event_name == 'pull_request_target'
-        uses: contributor-assistant/github-action@v2.6.1
+        if: github.event.comment.body == 'recheck' || env.SIGNATURE_HAPPENED == 'true' || github.event_name == 'pull_request_target'
+        uses: SiliconLabsWorkflows/cla-assistant@silabs_flavour
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # the below token should have repo scope and must be manually added by you in the repository's secret
           # This token is required only if you have configured to store the signatures in a remote repository/organization
           PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          EMAIL: ${{ github.event.inputs.email }}
+
         with:
           path-to-signatures: 'cla_signatures_db.json'
-          path-to-document: 'cla.md'
+          path-to-document: 'https://github.com/AndrasZiegler/bluetooth-AoA-example/blob/main/cla.md'
           # branch should not be protected
-          branch: 'main'
+          branch: 'test'
           allowlist: user1,bot*
           # the followings are the optional inputs - If the optional inputs are not given, then default values will be taken
           remote-organization-name: 'SiliconLabsWorkflows'
           remote-repository-name: 'private-central-cla'
-          create-file-commit-message: 'For example: Creating file for storing CLA Signatures'
+          create-file-commit-message: 'Created the CLA database file. CLA Assistant Lite bot created this file.'
           signed-commit-message: 'For example: $contributorName has signed the CLA in $owner/$repo#$pullRequestNo'
-          #custom-notsigned-prcomment: 'pull request comment with Introductory message to ask new contributors to sign'
-          #custom-pr-sign-comment: 'The signature to be committed in order to sign the CLA'
+          custom-notsigned-prcomment: '$contributorName has not signed the CLA. Please sign the CLA by typing "I have read the CLA Document and I hereby sign the CLA with email: example@example.com" in the comments.'
+          custom-pr-sign-comment: 'The signature to be committed in order to sign the CLA'
           #custom-allsigned-prcomment: 'pull request comment when all contributors has signed, defaults to **CLA Assistant Lite bot** All Contributors have signed the CLA.'
           #lock-pullrequest-aftermerge: false - if you don't want this bot to automatically lock the pull request after merging (default - true)
           #use-dco-flag: true - If you are using DCO instead of CLA
