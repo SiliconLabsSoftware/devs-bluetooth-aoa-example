@@ -20,6 +20,9 @@ The host receives it, processes it and logs it to the standard output.
 Data is provided in JSON format and depending on the actual configuration it will be raw I/Q sample or angle information.
 The angle information is calculated by the host with MVP (Matrix Vector Processor) from the I/Q samples.
 
+If you are interested in other Bluethooth examples you can find more here:
+[Bluetooth application examples](https://github.com/SiliconLabs/bluetooth_applications)
+
 ### NCP firmware
 This is a simple locator NCP project, only change is that the VCOM is disabled (so the UART line can be used directly).
 
