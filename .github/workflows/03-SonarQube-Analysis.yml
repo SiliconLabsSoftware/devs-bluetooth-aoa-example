@@ -1,9 +1,7 @@
-name: SonarQube Analysis
+name: 03-SonarQube-Analysis
 
 on:
-  pull_request:
-      branches:
-          - main
+  #It is an internal tool, it can only ran a self hosted runner. Currently it can be triggered only manually.
   workflow_dispatch:
 
 
