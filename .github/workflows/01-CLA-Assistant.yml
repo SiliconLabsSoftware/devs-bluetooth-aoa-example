@@ -28,7 +28,7 @@ jobs:
           PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         with:
           path-to-signatures: 'cla_signatures_db.json'
-          path-to-document: 'cla.md'
+          path-to-document: 'https://github.com/SiliconLabsSoftware/bluetooth-AoA-example/blob/main/cla.md'
           # branch should not be protected
           branch: 'test'
           allowlist: user1,bot*
