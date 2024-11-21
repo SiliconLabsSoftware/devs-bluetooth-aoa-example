@@ -1,8 +1,9 @@
-name: Build the software
+name: 02-Build-Firmware
 on:
  pull_request:
     branches:
         - main
+        - develop
  workflow_dispatch:
 env:
     ARCH: x86_64

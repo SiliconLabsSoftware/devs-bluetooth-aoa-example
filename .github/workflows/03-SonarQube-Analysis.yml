@@ -1,9 +1,10 @@
-name: SonarQube Analysis
+name: 03-SonarQube-Analysis
 
 on:
   pull_request:
       branches:
           - main
+          - develop
   workflow_dispatch:
 
 
