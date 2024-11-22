@@ -1,4 +1,4 @@
-name: 00-Check.-Code-Convention
+name: 00-Check-Code-Convention
 on:
   push:
     branches-ignore:
