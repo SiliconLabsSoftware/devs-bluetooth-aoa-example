@@ -33,8 +33,8 @@ jobs:
           branch: 'debug'
           allowlist: silabs-*,bot*
           # the followings are the optional inputs - If the optional inputs are not given, then default values will be taken
-          remote-organization-name: 'SiliconLabsWorkflows'
-          remote-repository-name: 'private-central-cla'
+          remote-organization-name: "SiliconLabsInternal"
+          remote-repository-name: "contributor-license-agreements"
           create-file-commit-message: "Created the CLA database file. CLA Assistant Lite bot created this file."
           signed-commit-message: "$contributorName has signed the CLA in $owner/$repo#$pullRequestNo"
           #custom-notsigned-prcomment: 'pull request comment with Introductory message to ask new contributors to sign'
