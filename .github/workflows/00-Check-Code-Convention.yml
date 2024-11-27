@@ -34,11 +34,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4.1.7
       with:
-        ref: "${{ github.event_name == 'workflow_dispatch' && github.event.inputs.branch || github.ref }}"
+        ref: "${{ github.event_name == 'workflow_dispatch' && github.event.inputs.branch || github.ref }}" 
     - name: Log Current Branch and Commit
       run: |
           echo "Current branch: $(git rev-parse --abbrev-ref HEAD)"
-          echo "Current commit: $(git rev-parse HEAD)"
+          echo "Current commit: $(git rev-parse HEAD)" 
     - name: Install python3.11
       if: always()
       run: |
@@ -88,3 +88,14 @@ jobs:
         name: CodingConventionResult
         path: CodingConventionTool.txt
         retention-days: 90
+    - name: Check log file to set status of the job
+      run: |
+        keywords=("Failed")
+        for keyword in "${keywords[@]}"; do
+          if grep -q "$keyword" CodingConventionTool.txt; then
+            echo "Keyword '$keyword' found in the file."
+            exit 1
+          else
+            echo "Keyword '$keyword' not found in the file."
+          fi
+        done
