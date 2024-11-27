@@ -88,3 +88,14 @@ jobs:
         name: CodingConventionResult
         path: CodingConventionTool.txt
         retention-days: 90
+    - name: Check log file to set status of the job
+      run: |
+        keywords=("Failed")
+        for keyword in "${keywords[@]}"; do
+          if grep -q "$keyword" CodingConventionTool.txt; then
+            echo "Keyword '$keyword' found in the file."
+            exit 1
+          else
+            echo "Keyword '$keyword' not found in the file."
+          fi
+        done

@@ -382,7 +382,7 @@ def reformat_path(path):
 
 
 def check_util_exist(util_name, env):
-    """Check wether the selected utility exist
+    """Check whether the selected utility exist
 
     Check if the selected utility exists in the system PATH.
 
@@ -1134,7 +1134,7 @@ def main():
                     time.sleep(delay_display)
                 else:
                     time.sleep(delay_display)
-                    # in this case the gbl generator function will check wether the key_gen really generated
+                    # in this case the gbl generator function will check whether the key_gen really generated
                     # a valid signature key or not
                     SIGN_KEY_EXIST = key_gen(SIGN_N, encrypt_type='ecc-p256')
             elif args.all or AUTO_KEYGEN:
@@ -1169,7 +1169,7 @@ def main():
                     time.sleep(delay_display)
                 else:
                     time.sleep(delay_display)
-                    # in this case the gbl generator function will check wether the key_gen really generated
+                    # in this case the gbl generator function will check whether the key_gen really generated
                     # a valid encryption key or not
                     ENCRYPT_KEY_EXIST = key_gen(ENCRYPT_N)
             elif args.all or AUTO_KEYGEN:
