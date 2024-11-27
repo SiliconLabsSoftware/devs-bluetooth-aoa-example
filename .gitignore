@@ -14,5 +14,5 @@
 **/.trash
 **/.pdm
 **/.uceditor
-**/autogen/*.crc 
+**/autogen/*.crc
 **/__pycache__
