@@ -1,43 +1,43 @@
 name: 03-SonarQube-Analysis
 
 on:
-  #It is an internal tool, it can only ran a self hosted runner. Currently it can be triggered only manually.
+  # It is an internal tool, it can only run on a self-hosted runner. Currently, it can be triggered only manually.
   workflow_dispatch:
 
-
 jobs:
-    sonarqube:
-        runs-on: llbp-bud-lab006
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v4.2.2
+  sonarqube:
+    runs-on: llbp-bud-lab006
+    env:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      INTERNAL_REPOSITORY_NAME: "lx0017637.silabs.com:5000"
+      DOCKER_IMAGE: "bluetooth-aoa-example-build-env:1.0.0"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.2.2
 
-            - name: Pull a docker image file
-              run: docker pull lx0017637.silabs.com:5000/bluetooth-aoa-example-build-env:1.0.0
+      - name: Pull a docker image file
+        run: docker pull ${{ env.INTERNAL_REPOSITORY_NAME }}/${{ env.DOCKER_IMAGE }}
 
-            - name: Run SonarQube analysis
+      - name: Run SonarQube analysis
+        run: |
+            docker run -u root --rm -v $(pwd):/home/jenkins/bluetooth-aoa-example ${{ env.INTERNAL_REPOSITORY_NAME }}/${{ env.DOCKER_IMAGE }} /bin/sh -c " \
+            cd bluetooth-aoa-examplec && \
+            make all && \
+            rm -rf sonar-bw && \
+            rm -rf .scannerwork && \
+            rm -rf locator_ncp/build && \
+            rm -rf locator_host/build && \
+            mkdir sonar-bw && \
+            /opt/build-wrapper-linux-x86/build-wrapper-linux-x86-64 --out-dir sonar-bw/locator_host/ make locator_host && \
+            /opt/build-wrapper-linux-x86/build-wrapper-linux-x86-64 --out-dir sonar-bw/locator_ncp/ make locator_ncp && \
+            sonar-scanner -Dsonar.token=$SONAR_TOKEN -Dsonar.host.url=$SONAR_HOST_URL"
 
-              run: |
-                docker run -u root --rm -v $(pwd):/home/jenkins/bluetooth-AoA-example lx0017637.silabs.com:5000/bluetooth-AoA-example:1.0.0 /bin/sh -c "
-                  cd bluetooth-AoA-examplec &&
-                  make all &&
-                  rm -rf sonar-bw &&
-                  rm -rf .scannerwork &&
-                  rm -rf locator_ncp/build &&
-                  rm -rf locator_host/build
-                  mkdir sonar-bw &&
-                  /opt/build-wrapper-linux-x86/build-wrapper-linux-x86-64 --out-dir sonar-bw/locator_host/ make locator_host &&
-                  /opt/build-wrapper-linux-x86/build-wrapper-linux-x86-64 --out-dir sonar-bw/locator_ncp/ make locator_ncp &&
-                  sonar-scanner -Dsonar.token=$SONAR_TOKEN -Dsonar.host.url=$SONAR_HOST_URL"
-
-            - name: Cleanup leftover files
-              if: always()
-              run: |
-                docker run -u root --rm -v $(pwd):/home/jenkins/bluetooth-AoA-example lx0017637.silabs.com:5000/bluetooth-AoA-example:1.0.0 /bin/sh -c "
-                rm -rf sonar-bw && \
-                rm -rf .scannerwork && \
-                rm -rf locator_ncp/build && \
-                rm -rf locator_host/build "
+      - name: Cleanup leftover files
+        if: always()
+        run: |
+          docker run -u root --rm -v $(pwd):/home/jenkins/bluetooth-aoa-example ${{ env.INTERNAL_REPOSITORY_NAME }}/${{ env.DOCKER_IMAGE }} /bin/sh -c "
+          rm -rf sonar-bw && \
+          rm -rf .scannerwork && \
+          rm -rf locator_ncp/build && \
+          rm -rf locator_host/build "
