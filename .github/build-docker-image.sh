@@ -3,7 +3,7 @@
 display_help() {
     echo "Usage: $0 -i image_name -v version -r registry -a architecture " >&2
     echo
-    echo "   -i image_name    Specify the image name, for example: devs_xg24_aoa_poc"
+    echo "   -i image_name    Specify the image name, for example: bluetooth-AoA-example-build-env"
     echo "   -v version       Specify the version of docker image, for example: 1.0.0"
     echo "   -r registry      Specify the Docker registry to push the image to (optional) example: lx0017637.silabs.com:5000"
     echo "                    If internal registry is used, SonarQube will be included."

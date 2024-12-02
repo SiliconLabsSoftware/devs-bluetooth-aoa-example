@@ -3,7 +3,7 @@
 display_help() {
     echo "Usage: $0 -i image_name -v version -r registry -a architecture -c clean" >&2
     echo
-    echo "   -i image_name    Specify the image name, for example: devs_xg24_aoa_poc"
+    echo "   -i image_name    Specify the image name, for example: bluetooth-AoA-example-build-env"
     echo "   -v version       Specify the version of docker image, for example: 1.0.0"
     echo "   -r registry      Specify the Docker registry to push the image to"
     echo "   -a architecture  Specify the architecture, for example: x86_64 or aarch64 (optional)"
@@ -12,7 +12,7 @@ display_help() {
     exit 1
 }
 
-image_name="devs_xg24_aoa_poc"
+image_name="bluetooth-AoA-example-build-env"
 version="1.0.0"
 registry="none"
 architecture="x86_64"
@@ -53,7 +53,7 @@ sh ./.github/build-docker-image.sh -i $image_name -v $version -r $registry -a $a
 
 echo "<----- Running the docker based build environment ----->"
 # Run the docker image
-docker run -u root --rm -v $(pwd):/home/jenkins/devs_xg24_aoa_poc $image_name:$version /bin/sh -c "cd devs_xg24_aoa_poc && make all"
+docker run -u root --rm -v $(pwd):/home/jenkins/$image_name $image_name:$version /bin/sh -c "cd $image_name && make all"
 
 if [ "$clean" = "true" ]; then
     docker rmi $image_name:$version
