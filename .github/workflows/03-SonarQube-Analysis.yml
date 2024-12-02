@@ -22,7 +22,7 @@ jobs:
       - name: Run SonarQube analysis
         run: |
             docker run -u root --rm -v $(pwd):/home/jenkins/bluetooth-aoa-example ${{ env.INTERNAL_REPOSITORY_NAME }}/${{ env.DOCKER_IMAGE }} /bin/sh -c " \
-            cd bluetooth-aoa-examplec && \
+            cd bluetooth-aoa-example && \
             make all && \
             rm -rf sonar-bw && \
             rm -rf .scannerwork && \
