@@ -16,13 +16,13 @@ jobs:
               uses: actions/checkout@v4.2.2
 
             - name: Pull a docker image file
-              run: docker pull lx0017637.silabs.com:5000/devs_identec_xg24_aoa_poc:1.0.0
+              run: docker pull lx0017637.silabs.com:5000/bluetooth-AoA-example:1.0.0
 
             - name: Run SonarQube analysis
 
               run: |
-                docker run -u root --rm -v $(pwd):/home/jenkins/devs_identec_xg24_aoa_poc lx0017637.silabs.com:5000/devs_identec_xg24_aoa_poc:1.0.0 /bin/sh -c "
-                  cd devs_identec_xg24_aoa_poc &&
+                docker run -u root --rm -v $(pwd):/home/jenkins/bluetooth-AoA-example lx0017637.silabs.com:5000/bluetooth-AoA-example:1.0.0 /bin/sh -c "
+                  cd bluetooth-AoA-examplec &&
                   make all &&
                   rm -rf sonar-bw &&
                   rm -rf .scannerwork &&
@@ -36,7 +36,7 @@ jobs:
             - name: Cleanup leftover files
               if: always()
               run: |
-                docker run -u root --rm -v $(pwd):/home/jenkins/devs_identec_xg24_aoa_poc lx0017637.silabs.com:5000/devs_identec_xg24_aoa_poc:1.0.0 /bin/sh -c "
+                docker run -u root --rm -v $(pwd):/home/jenkins/bluetooth-AoA-example lx0017637.silabs.com:5000/bluetooth-AoA-example:1.0.0 /bin/sh -c "
                 rm -rf sonar-bw && \
                 rm -rf .scannerwork && \
                 rm -rf locator_ncp/build && \
