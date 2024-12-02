@@ -3,7 +3,7 @@
 display_help() {
     echo "Usage: $0 -i image_name -v version -r registry -a architecture -c clean" >&2
     echo
-    echo "   -i image_name    Specify the image name, for example: bluetooth-AoA-example-build-env"
+    echo "   -i image_name    Specify the image name, for example: bluetooth-aoa-example-build-env"
     echo "   -v version       Specify the version of docker image, for example: 1.0.0"
     echo "   -r registry      Specify the Docker registry to push the image to"
     echo "   -a architecture  Specify the architecture, for example: x86_64 or aarch64 (optional)"
@@ -12,7 +12,7 @@ display_help() {
     exit 1
 }
 
-image_name="bluetooth-AoA-example-build-env"
+image_name="bluetooth-aoa-example-build-env"
 version="1.0.0"
 registry="none"
 architecture="x86_64"

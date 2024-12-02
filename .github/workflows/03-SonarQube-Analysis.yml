@@ -16,7 +16,7 @@ jobs:
               uses: actions/checkout@v4.2.2
 
             - name: Pull a docker image file
-              run: docker pull lx0017637.silabs.com:5000/bluetooth-AoA-example:1.0.0
+              run: docker pull lx0017637.silabs.com:5000/bluetooth-aoa-example-build-env:1.0.0
 
             - name: Run SonarQube analysis
 
