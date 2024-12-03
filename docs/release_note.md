@@ -8,7 +8,7 @@ Initial public release of the project.
 - Feature 1: CICD added
   - Code Convention checking
   - Firmware build
-  - SonarQube static code analizer check
+  - SonarQube static code analyzer check
   - Trufflehog secret scanner
   - CLA assistant
 - Feature 2: Necessary public repo documentation was added.
