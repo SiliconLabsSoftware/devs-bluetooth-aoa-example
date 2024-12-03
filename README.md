@@ -1,4 +1,5 @@
 # Angle of Arrival locator project
+- [Angle of Arrival locator project](#angle-of-arrival-locator-project)
   - [Overview](#overview)
     - [NCP firmware](#ncp-firmware)
     - [Host firmware](#host-firmware)
@@ -112,7 +113,7 @@ The *build-with-docker.sh* script handles all the building process.
 You should start the script directly from the repo main folder. Otherwise the paths can be messed up.
 
 You can use the following command line options:
-  -  "-i" image_name    Specify the image name. Default value: *devs_xg24_aoa_poc-build-env*
+  -  "-i" image_name    Specify the image name. Default value: *bluetooth-aoa-example-build-env*
   -  "-v" version       Specify the version of docker image. Default value: *1.0.0*
   -  "-r" registry      Specify the Docker registry to push the image to. Default value: *none*
   -  "-a" architecture  Specify architecture of build machine. Accepted values are `x86_64` and `aarch64`.  Defaults to `x86_64`
@@ -120,7 +121,7 @@ You can use the following command line options:
 
 Example:
 ```bash
-~/devs_xg24_aoa_poc$ sh .github/build-with-docker.sh -i devs_xg24_aoa_poc-build-env -v 1.0.0 -c
+~/devs_xg24_aoa_poc$ sh .github/build-with-docker.sh -i bluetooth-aoa-example-build-env -v 1.0.0 -c
 ```
 
 ## How to use the project
