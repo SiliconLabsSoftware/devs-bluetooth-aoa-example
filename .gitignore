@@ -2,7 +2,6 @@
 *.orig
 *.bak
 *.html
-*.png
 .vscode/
 **/build/
 **/GNU ARM v*
