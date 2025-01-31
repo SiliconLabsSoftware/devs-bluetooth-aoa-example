@@ -73,7 +73,7 @@ jobs:
           sudo make install
           echo "Uncrustify has been installed successfully!"
           cd ../../
-          sudo cp ./.github/uncrustify.cfg ./uncrustify/uncrustify.cfg
+          sudo cp ./tools/uncrustify.cfg ./uncrustify/uncrustify.cfg
           echo "Install clang-tidy and cppcheck ..."
           sudo apt install clang-tidy cppcheck
     - name: Run test
