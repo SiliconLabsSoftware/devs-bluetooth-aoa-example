@@ -2,11 +2,6 @@ name: Trigger and Monitor SQ Test
 
 on:
   workflow_dispatch:
-    inputs:
-      SQA_branch:
-        description: 'SQA Branch name'
-        required: true
-        default: '2-add-bluetooth-aoa-project'
 
 jobs:
   trigger-SQ-test:
@@ -22,7 +17,7 @@ jobs:
             -H "Accept: application/vnd.github.v3+json" \
             -H "Authorization: token ${{ secrets.PERSONAL_ACCESS_TOKEN }}" \
             https://api.github.com/repos/SiliconLabsInternal/DevS-SQA/actions/workflows/01-sonarqube-analysis.yml/dispatches \
-            -d '{"ref":"${{inputs.SQA_branch}}","inputs":{"repository": "${{ github.repository }}" ,"ref":"${{ github.ref }}"}}')
+            -d '{"ref":"2-add-bluetooth-aoa-project","inputs":{"repository": "${{ github.repository }}" ,"ref":"${{ github.ref }}"}}')
           echo "Triggered workflow: $response"
           if echo "$response" | grep -q '"message": "Not Found"'; then
             echo "Error: Workflow or repository not found. Please check the repository name, workflow file name, and branch name."
