@@ -1,4 +1,4 @@
-#!/bin/sh 
+#!/bin/sh
 
 display_help() {
     echo "Usage: $0 -i image_name -v version -r registry -a architecture -c clean" >&2 
