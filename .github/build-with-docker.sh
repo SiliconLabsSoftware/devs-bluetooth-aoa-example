@@ -1,7 +1,7 @@
-#!/bin/sh 
+#!/bin/sh
 
 display_help() {
-    echo "Usage: $0 -i image_name -v version -r registry -a architecture -c clean" >&2 
+    echo "Usage: $0 -i image_name -v version -r registry -a architecture -c clean" >&2
     echo
     echo "   -i image_name    Specify the image name, for example: bluetooth-aoa-example-build-env"
     echo "   -v version       Specify the version of docker image, for example: 1.0.0"
