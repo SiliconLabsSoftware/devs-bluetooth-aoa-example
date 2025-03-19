@@ -63,7 +63,7 @@ Build system dependencies for ubuntu 22.04 lts systems:
 Usage (most modern IDE will natively support this):
 1. Go to the project directory (e.g. ./locator_host/) and configure:
     ```bash
-    cmake <project_name>_cmake -B build -G "Ninja" -DCMAKE_BUILD_TYPE:STRING=<build_type> -DCMAKE_TOOLCHAIN_FILE:STRING=toolchain.cmake 
+    cmake <project_name>_cmake -B build -G "Ninja" -DCMAKE_BUILD_TYPE:STRING=<build_type> -DCMAKE_TOOLCHAIN_FILE:STRING=toolchain.cmake
     ```
     `<project_name>` can be either `locator_host` or `locator_ncp`.
     `<build_type>` can be `Debug` or `Release`.
