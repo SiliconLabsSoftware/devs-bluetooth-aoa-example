@@ -141,20 +141,24 @@ This means that the Bluetooth host and NCP is initialized.
 
 ### Network setup
 If the MQTT capability of the demo system is required then the following are needed:
-• A local network with full access.
-• A MQTT broker. Mosquito is recommended. It’s easy to set up on a Raspberry PI, steps:
-      1.Install OS
-      2. Connect to the internet.
-      3. sudo apt update && sudo apt upgrade
-      4. sudo apt install -y mosquitto mosquitto-clients
-      5. sudo systemctl enable mosquitto.service
-      6. sudo nano /etc/mosquitto/mosquitto.conf
-      7. Add to the config file: “listener 1883”
-      8. Add to the config file: “allow_anonymous true”
-      9. Save and close config file
-      10. reboot raspberry
-      11. Check installation success with: “mosquitto -v”
-• A MQTT client (to check the published messages). MQTT Explorer is recommended.
+<ul>
+  <li>A local network with full access.</li>
+  <li>A MQTT broker. Mosquito is recommended. It’s easy to set up on a Raspberry PI, steps:</li>
+   <ul>
+     <li>1.Install OS</li>
+     <li>2. Connect to the internet.</li>
+     <li>3. sudo apt update && sudo apt upgrade</li>
+     <li>4. sudo apt install -y mosquitto mosquitto-clients</li>
+     <li>5. sudo systemctl enable mosquitto.service</li>
+     <li>6. sudo nano /etc/mosquitto/mosquitto.conf</li>
+     <li>7. Add to the config file: “listener 1883”</li>
+     <li>8. Add to the config file: “allow_anonymous true”</li>
+     <li>9. Save and close config file</li>
+     <li>10. reboot raspberry</li>
+     <li>11. Check installation success with: “mosquitto -v”</li>
+   </ul>
+  <li> A MQTT client (to check the published messages). MQTT Explorer is recommended.</li>
+</ul>
 Encryption shall be disabled, password and username shall be left blank, IP must be the raspberry’s IP.
 
 ![MQTT Explorer example](resources/mqttt_explorer_example.png "MQTT explorer example")
