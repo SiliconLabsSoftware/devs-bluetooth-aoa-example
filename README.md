@@ -140,6 +140,7 @@ MAC address (reversed endianness): 60A423C973C3 “
 
 This means that the Bluetooth host and NCP is initialized.
 HELLO GENERAL KENOBIs
+JESUS CHRIST TO BE PRAISED
 ### Network setup
 If the MQTT capability of the demo system is required then the following are needed:
 <ul>
