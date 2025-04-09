@@ -16,6 +16,7 @@
   - [How to use the project](#how-to-use-the-project)
     - [Network setup](#network-setup)
     - [MQTT usage](#mqtt-usage)
+  - [Disclaimer](#disclaimer)
 
 ## Overview
 The system contains 2 MCUs an EFR32xG24 (aka host) and an EFR32BG22 antenna array (aka NCP).
@@ -138,7 +139,7 @@ After “OK” the following text shall be present:
 MAC address (reversed endianness): 60A423C973C3 “
 
 This means that the Bluetooth host and NCP is initialized.
-
+HELLO GENERAL KENOBIs
 ### Network setup
 If the MQTT capability of the demo system is required then the following are needed:
 <ul>
