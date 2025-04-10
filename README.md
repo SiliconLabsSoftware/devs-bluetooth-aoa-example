@@ -1,6 +1,3 @@
-![Static Badge](https://img.shields.io/badge/Security_Support-Not_Supported-red)
-
-
 # Angle of Arrival locator project
 - [Angle of Arrival locator project](#angle-of-arrival-locator-project)
   - [Overview](#overview)
