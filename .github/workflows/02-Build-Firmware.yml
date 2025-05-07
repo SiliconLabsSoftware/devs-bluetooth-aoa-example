@@ -2,8 +2,7 @@ name: 02-Build-Firmware
 on:
  pull_request:
     branches:
-        - main
-        - develop
+        - master
  workflow_dispatch:
 env:
     ARCH: x86_64

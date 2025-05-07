@@ -2,11 +2,11 @@ name: 00-Check-Code-Convention
 on:
   push:
     branches-ignore:
-      - main
+      - master
       - "tests/**"
   pull_request:
     branches:
-      - main
+      - master
       - develop
       - "release/**"
   workflow_dispatch:
@@ -19,7 +19,7 @@ on:
 jobs:
   job1:
     name: Check coding convention
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
     - name: Trigger
       run: echo "Triggered by ${{github.event_name}} event"

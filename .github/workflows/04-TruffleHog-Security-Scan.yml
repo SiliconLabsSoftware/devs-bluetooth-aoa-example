@@ -2,8 +2,7 @@ name: 04-TruffleHog-Security-Scan
 on:
     pull_request:
         branches:
-            - main
-            - develop
+            - master
     workflow_dispatch:
 jobs:
   trufflehog_scan:
