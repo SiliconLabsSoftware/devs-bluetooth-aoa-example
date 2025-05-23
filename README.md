@@ -13,6 +13,7 @@
   - [How to use the project](#how-to-use-the-project)
     - [Network setup](#network-setup)
     - [MQTT usage](#mqtt-usage)
+  - [Disclaimer](#disclaimer)
 
 ## Overview
 The system contains 2 MCUs an EFR32xG24 (aka host) and an EFR32BG22 antenna array (aka NCP).
@@ -59,8 +60,7 @@ Build system dependencies for ubuntu 22.04 lts systems:
 Usage (most modern IDE will natively support this):
 1. Go to the project directory and configure:
     ```bash
-    cmake <project_name>_cmake -B build -G "Ninja" -DCMAKE_BUILD_TYPE:STRING=<build_type>
-    ```
+    cmake <project_name>_cmake -B build -G "Ninja" -DCMAKE_BUILD_TYPE:STRING=<build_type> -DCMAKE_TOOLCHAIN_FILE:STRING=toolchain.cmake```
     `<project_name>` can be either `locator_host` or `locator_ncp`.
     `<build_type>` can be `Debug` or `Release`.
     This must be done with a fresh project or when the build recipe changes
@@ -109,20 +109,8 @@ Build process was tested on Ubuntu 22.04 LTS.
   This is important because the script expects the current user have full docker managing access.
 
 #### How to build the docker image
-The *build-with-docker.sh* script handles all the building process.
-You should start the script directly from the repo main folder. Otherwise the paths can be messed up.
-
-You can use the following command line options:
-  -  "-i" image_name    Specify the image name. Default value: *bluetooth-aoa-example-build-env*
-  -  "-v" version       Specify the version of docker image. Default value: *1.0.0*
-  -  "-r" registry      Specify the Docker registry to push the image to. Default value: *none*
-  -  "-a" architecture  Specify architecture of build machine. Accepted values are `x86_64` and `aarch64`.  Defaults to `x86_64`
-  -  "-c" clean         Boolean option. if it is added then after the build process the docker image is removed to save storage space. Default value: *true*
-
-Example:
-```bash
-~/devs_xg24_aoa_poc$ sh .github/build-with-docker.sh -i bluetooth-aoa-example-build-env -v 1.0.0 -c
-```
+An action workflow already building the SW inside a docker image: [02-Build-Firmware.yml](.github/workflows/02-Build-Firmware.yml)
+You can follow that and build your docker image on Ubuntu or on Windows with WSL.
 
 ## How to use the project
 
