@@ -1,22 +1,22 @@
 # Contributing Guideline
-As an open-source project, we welcome and encourage the community to submit patches directly to the project.  
-In our collaborative open-source environment, standards and methods for submitting changes help reduce  
+As an open-source project, we welcome and encourage the community to submit patches directly to the project.
+In our collaborative open-source environment, standards and methods for submitting changes help reduce
 the chaos that can result from an active development community.
 
-This document explains how to participate in project conversations, log bugs and enhancement requests,  
+This document explains how to participate in project conversations, log bugs and enhancement requests,
 and submit patches to the project so your patch will be accepted quickly into the codebase.
 
 ## Prerequisites
-You should be familiar with Git and GitHub. [Getting started](https://docs.github.com/en/get-started)  
-If you haven't already done so, you'll need to create a (free) GitHub account at https://github.com  
+You should be familiar with Git and GitHub. [Getting started](https://docs.github.com/en/get-started)
+If you haven't already done so, you'll need to create a (free) GitHub account at https://github.com
 and have Git tools available on your development system. You also need to add your email address to your account.
 
 As a contributor, you'll want to be familiar with the Silicon Labs tooling:
-- [Simplicity Studio](https://docs.silabs.com/simplicity-studio-5-users-guide/latest/ss-5-users-guide-overview/)  
-- [Platform](https://docs.silabs.com/gecko-platform/latest/platform-overview/)  
-- [Simplicity Commander](https://docs.silabs.com/simplicity-commander/latest/simplicity-commander-start/)  
+- [Simplicity Studio](https://docs.silabs.com/simplicity-studio-5-users-guide/latest/ss-5-users-guide-overview/)
+- [Platform](https://docs.silabs.com/gecko-platform/latest/platform-overview/)
+- [Simplicity Commander](https://docs.silabs.com/simplicity-commander/latest/simplicity-commander-start/)
 
-Read the Silicon Labs [coding guidelines](https://github.com/SiliconLabsSoftware/agreements-and-guidelines/blob/main/coding_standard.md).  
+Read the Silicon Labs [coding guidelines](https://github.com/SiliconLabsSoftware/agreements-and-guidelines/blob/main/coding_standard.md).
 ## Git Setup
 We need to know who you are, and how to contact you. Please add the following information to your Git installation:
 ```
@@ -24,10 +24,10 @@ git config --global user.name "FirstName LastName"
 git config --global user.email "firstname.lastname@example.com"
 ```
 set the Git configuration variables user.name to your full name, and user.email to your email address.
-The user.name must be your full name (first and last at minimum), not a pseudonym or hacker handle.  
-The email address that you use in your Git configuration must match the email address you use to sign your commits.  
+The user.name must be your full name (first and last at minimum), not a pseudonym or hacker handle.
+The email address that you use in your Git configuration must match the email address you use to sign your commits.
 
-If you intend to edit commits using the Github.com UI, ensure that your github profile email address and profile name also match those used in your git configuration  
+If you intend to edit commits using the Github.com UI, ensure that your github profile email address and profile name also match those used in your git configuration
 (user.name & user.email).
 
 ### Set up GitHub commit signature
@@ -39,7 +39,7 @@ The repository requires signed off commits. Follow this [guide](https://docs.git
 2. Configure your local repository with the gpg key. [guide](https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key)
 3. Configure your GitHub account with the gpg key [guide](https://docs.github.com/en/authentication/managing-commit-signature-verification/associating-an-email-with-your-gpg-key)
 
-**Command line steps:**  
+**Command line steps:**
 Use the git-bash and navigate into your local repo.
 1. disable all the gpg signature globally. (Optional)
 ```
@@ -49,6 +49,13 @@ $ git config --global --unset gpg.format
 ```
 $ gpg --full-generate-key
 ```
+Choose "RSA and RSA" (option 1)  
+Choose 4096 bits for key size  
+Set expiration (0 = no expiration, or set a specific time)  
+Enter your name: put your username here  
+Enter your email: put your email address  
+Enter a comment (optional)  
+Create a strong passphrase  
 3. Configure the local repo with your new key.
 ```
 $ gpg --list-secret-keys --keyid-format=long
@@ -78,10 +85,10 @@ Make sure your email address is verified by GitHub before committing anything.
 Please check the [Licensing.md](../LICENSE.md) for more details.
 
 ## Contributor License Agreement
-When a project receives a contribution, it must be clear that the contributor has the rights to contribute the content and that the project then has the rights to use and otherwise operate with the content (e.g., relicense or distribute). A Contributor License Agreement (CLA) is a legal document establishing these rights and defining the terms under which a license is granted by a contributor to an open-source project. A CLA clarifies that any contribution was authorized (not contributing someone else�s code without permission or without legal authority to contribute) and protects the project from potential future legal challenges.
+When a project receives a contribution, it must be clear that the contributor has the rights to contribute the content and that the project then has the rights to use and otherwise operate with the content (e.g., relicense or distribute). A Contributor License Agreement (CLA) is a legal document establishing these rights and defining the terms under which a license is granted by a contributor to an open-source project. A CLA clarifies that any contribution was authorized (not contributing someone else’s code without permission or without legal authority to contribute) and protects the project from potential future legal challenges.
 
-Please check Silicon Labs [CLA document](https://github.com/SiliconLabsSoftware/agreements-and-guidelines/blob/main/contributor_license_agreement.md).  
-During the pull request review, every new contributor must sign the CLA document. It can be signed as an individual or on behalf of a company.  
+Please check Silicon Labs [CLA document](https://github.com/SiliconLabsSoftware/agreements-and-guidelines/blob/main/contributor_license_agreement.md).
+During the pull request review, every new contributor must sign the CLA document. It can be signed as an individual or on behalf of a company.
 Signatures have a 6-month expiration period.
 
 ## Contribution process
@@ -95,7 +102,7 @@ Please follow the official GitHub [guide](https://docs.github.com/en/get-started
 You can create your branch on your own forked repo now.
 
 ### Branch Naming Convention
-Branch naming shall follow the following template: *IssueNumber-issue-title-goes-here*  
+Branch naming shall follow the following template: *IssueNumber-issue-title-goes-here*
 Example branch name:
 ```
 99-bootloader-implementation
@@ -106,7 +113,7 @@ Now you have a branch. You can start committing your code onto it.
 ## Commit Messages
 
 Silicon Labs repositories require signed-off commits.
-Every commit represents a change inside the repository. Every change needs to be documented extensively.  
+Every commit represents a change inside the repository. Every change needs to be documented extensively.
 ```
 Issuenumber-summary-of-changes
 
@@ -115,20 +122,20 @@ Another line of really good description
 ```
 
 ## Pull Request Guideline
-Okay you finished your work committed all your changes to your branch. Time to create a pull request.  
-Refer to the general pull request [guideline](https://opensource.guide/how-to-contribute/#opening-a-pull-request) from GitHub.  
-What to consider when raising a Pull Request:  
-1. **Pull Request Naming**  
+Okay you finished your work committed all your changes to your branch. Time to create a pull request.
+Refer to the general pull request [guideline](https://opensource.guide/how-to-contribute/#opening-a-pull-request) from GitHub.
+What to consider when raising a Pull Request:
+1. **Pull Request Naming**
    By default, GitHub uses the branch name as the pull request title. If the branch naming convention was followed, no changes are needed here.
 2. **Create Description**
    Fill out the pull request template.
-3. **Check the Reviewer List**  
-   GitHub assigns reviewers based on the [CODEOWNERS](CODEOWNERS) file.  
+3. **Check the Reviewer List**
+   GitHub assigns reviewers based on the [CODEOWNERS](CODEOWNERS) file.
    Add more reviewers if needed. Do not remove reviewers from the PR. Ask the repository owner for updates to the code owners.
-4. **Evaluate the Action Workflow Results**  
+4. **Evaluate the Action Workflow Results**
    The following workflows are included in every repository:
    - **[Coding Convention Check](workflows/00-Check-Code-Convention.yml)**: Analyzes the code formatting and fails if any rules are broken.
-   - **[Firmware Build](workflows/02-Build-Firmware.yml)**: Builds the firmware inside the [Dockerfile](../Dockerfile).  
+   - **[Firmware Build](workflows/02-Build-Firmware.yml)**: Builds the firmware inside the [Dockerfile](../Dockerfile).
    - **[Secret Scanner](workflows/04-TruffleHog-Security-Scan.yml)**: Runs the TruffleHog security scanner to look for API keys and committed secrets.
 
 ### As a Reviewer
@@ -138,4 +145,4 @@ What to consider when reviewing a Pull Request:
 - All builds must pass successfully.
 - The code must follow the Silicon Labs [coding guidelines](https://github.com/SiliconLabsSoftware/agreements-and-guidelines/blob/main/coding_standard.md).
 - Write clear comments. Describe the issue and explain why you disagree (e.g., mistakes, errors, violations of conventions, performance risks, security issues, etc.).
-- If any comments must be addressed mandatorily, mark the pull request as �Draft.�
+- If any comments must be addressed mandatorily, mark the pull request as “Draft.”

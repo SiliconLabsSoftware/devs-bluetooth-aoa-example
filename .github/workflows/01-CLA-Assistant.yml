@@ -1,6 +1,5 @@
 name: 01-CLA-Assistant
-## This workflow is used only for public repositories
-## uncomment the other trigger conditions for public repositories
+## This workflow is used for public repositories
 
 on:
   issue_comment:
