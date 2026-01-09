@@ -1,0 +1,94 @@
+name: Sonar-analysis
+on:
+    pull_request:
+        branches:
+            - master
+    push:
+        branches:
+            - master
+    workflow_dispatch:
+
+permissions:
+    contents: read
+
+env:
+    ARCH: x86_64
+    REPO_OWNER: ${{ github.repository_owner }}
+    REPO_NAME: ${{ github.event.repository.name }}
+    SONAR_ORG: "siliconlabssoftware"
+    POST_BUILD_EXE: "/opt/commander-cli/commander-cli"
+    ARM_GCC_DIR: "/opt/gcc-arm-none-eabi/"
+    ARM_GCC_URL: "https://developer.arm.com/-/media/Files/downloads/gnu/12.2.rel1/binrel/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi.tar.xz"
+
+jobs:
+    build:
+        name: Build and analyze
+        runs-on: ubuntu-latest
+        env:
+            BUILD_WRAPPER_OUT_DIR: build_wrapper_output_directory
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+            - name: Trigger
+              run: echo "Triggered by ${{ github.event_name }} event"
+            - name: Install Dependencies
+              run: |
+                  sudo apt-get update && \
+                  sudo apt-get install --no-install-recommends -y \
+                  clang \
+                  clang-tidy \
+                  cppcheck \
+                  git \
+                  build-essential \
+                  curl \
+                  jq \
+                  python3-dev \
+                  python3-pip \
+                  ninja-build \
+                  make \
+                  wget \
+                  zip \
+                  unzip \
+                  libgl1 \
+                  libglib2.0-0 \
+                  libpcre2-dev
+            - name: CMake 3.25.4
+              run: |
+                  wget https://github.com/Kitware/CMake/releases/download/v3.25.3/cmake-3.25.3-linux-${{ env.ARCH }}.sh \
+                  -q -O /tmp/cmake-install.sh \
+                  && chmod u+x /tmp/cmake-install.sh \
+                  && mkdir /opt/cmake-3.25.3 \
+                  && /tmp/cmake-install.sh --skip-license --prefix=/opt/cmake-3.25.3 \
+                  && rm /tmp/cmake-install.sh \
+                  && ln -sf /opt/cmake-3.25.3/bin/* /usr/local/bin
+            - name: Install GNU Arm Embedded Toolchain
+              run: |
+                  cd /tmp/ \
+                  && wget ${{ env.ARM_GCC_URL }} \
+                  && tar -xf arm-gnu-toolchain-12.2.rel1-${{ env.ARCH }}-arm-none-eabi.tar.xz \
+                  && mv arm-gnu-toolchain-12.2.rel1-${{ env.ARCH }}-arm-none-eabi /opt/gcc-arm-none-eabi \
+                  && rm arm-gnu-toolchain-12.2.rel1-${{ env.ARCH }}-arm-none-eabi.tar.xz -f
+            - name: Simplicity Commander
+              run: |
+                  wget https://www.silabs.com/documents/login/software/SimplicityCommander-Linux.zip \
+                  && unzip SimplicityCommander-Linux.zip \
+                  && tar -xf SimplicityCommander-Linux/Commander-cli_linux_${{ env.ARCH }}_*.tar.bz \
+                  && mv commander-cli /opt/commander-cli \
+                  && rm -rf SimplicityCommander-Linux.zip SimplicityCommander-Linux
+            - name: Install Build Wrapper
+              uses: SonarSource/sonarqube-scan-action/install-build-wrapper@v5
+            - name: Run Build Wrapper
+              run: |
+                  cd ${{ github.workspace }} && \
+                  build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} make all
+            - name: SonarQube Scan
+              uses: SonarSource/sonarqube-scan-action@v5
+              env:
+                  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+              with:
+                  args: >
+                      --define sonar.projectKey=${{ env.REPO_OWNER }}_${{ env.REPO_NAME }}
+                      --define sonar.projectName=${{ env.REPO_NAME }}
+                      --define sonar.organization=${{ env.SONAR_ORG }}
+                      --define sonar.cfamily.compile-commands=${{ env.BUILD_WRAPPER_OUT_DIR }}/compile_commands.json

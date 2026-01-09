@@ -1,75 +1,79 @@
 name: 02-Build-Firmware
+
+permissions:
+  contents: read
+
 on:
- pull_request:
+  pull_request:
     branches:
-        - master
- workflow_dispatch:
+      - master
+  workflow_dispatch:
 env:
-    ARCH: x86_64
-    POST_BUILD_EXE: "/opt/commander-cli/commander-cli"
-    ARM_GCC_DIR: "/opt/gcc-arm-none-eabi/"
-    ARM_GCC_URL: "https://developer.arm.com/-/media/Files/downloads/gnu/12.2.rel1/binrel/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi.tar.xz"
+  ARCH: x86_64
+  POST_BUILD_EXE: "/opt/commander-cli/commander-cli"
+  ARM_GCC_DIR: "/opt/gcc-arm-none-eabi/"
+  ARM_GCC_URL: "https://developer.arm.com/-/media/Files/downloads/gnu/12.2.rel1/binrel/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi.tar.xz"
 jobs:
-    FW_build:
-        runs-on: ubuntu-22.04
-        steps:
-            - name: Trigger
-              run: echo "Triggered by ${{ github.event_name }} event"
-            - name: Checkout
-              uses: actions/checkout@v4.2.2
-            - name: Install Dependencies
-              run: |
-                  sudo apt-get update && \
-                  sudo apt-get install --no-install-recommends -y \
-                  clang \
-                  clang-tidy \
-                  cppcheck \
-                  git \
-                  build-essential \
-                  curl \
-                  jq \
-                  python3-dev \
-                  python3-pip \
-                  ninja-build \
-                  make \
-                  wget \
-                  zip \
-                  unzip \
-                  libgl1 \
-                  libglib2.0-0 \
-                  libpcre2-dev
-            - name: CMake 3.25.4
-              run: |
-                wget https://github.com/Kitware/CMake/releases/download/v3.25.3/cmake-3.25.3-linux-${{ env.ARCH }}.sh \
-                -q -O /tmp/cmake-install.sh \
-                && chmod u+x /tmp/cmake-install.sh \
-                && mkdir /opt/cmake-3.25.3 \
-                && /tmp/cmake-install.sh --skip-license --prefix=/opt/cmake-3.25.3 \
-                && rm /tmp/cmake-install.sh \
-                && ln -sf /opt/cmake-3.25.3/bin/* /usr/local/bin
-            - name: Install GNU Arm Embedded Toolchain
-              run: |
-                cd /tmp/ \
-                && wget ${{ env.ARM_GCC_URL }} \
-                && tar -xf arm-gnu-toolchain-12.2.rel1-${{ env.ARCH }}-arm-none-eabi.tar.xz \
-                && mv arm-gnu-toolchain-12.2.rel1-${{ env.ARCH }}-arm-none-eabi /opt/gcc-arm-none-eabi \
-                && rm arm-gnu-toolchain-12.2.rel-${{ env.ARCH }}-arm-none-eabi -rf
-            - name: Simplicity Commander
-              run: |
-                wget https://www.silabs.com/documents/login/software/SimplicityCommander-Linux.zip \
-                && unzip SimplicityCommander-Linux.zip \
-                &&  tar -xf SimplicityCommander-Linux/Commander-cli_linux_${{ env.ARCH }}_*.tar.bz \
-                && mv commander-cli /opt/commander-cli \
-                && rm -rf SimplicityCommander-Linux.zip SimplicityCommander-Linux
-            - name: Build the project
-              run: |
-               cd ${{ github.workspace}} \
-               && make all
-            - name: Upload Build Artifacts
-              uses: actions/upload-artifact@v4.4.3
-              with:
-                name: build-artifacts-${{ github.run_number }}
-                path: |
-                  locator_ncp/build/locator_ncp.s37
-                  locator_host/build/locator_host.s37
-                retention-days: 90
+  FW_build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Trigger
+        run: echo "Triggered by ${{ github.event_name }} event"
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update && \
+          sudo apt-get install --no-install-recommends -y \
+          clang \
+          clang-tidy \
+          cppcheck \
+          git \
+          build-essential \
+          curl \
+          jq \
+          python3-dev \
+          python3-pip \
+          ninja-build \
+          make \
+          wget \
+          zip \
+          unzip \
+          libgl1 \
+          libglib2.0-0 \
+          libpcre2-dev
+      - name: CMake 3.25.4
+        run: |
+          wget https://github.com/Kitware/CMake/releases/download/v3.25.3/cmake-3.25.3-linux-${{ env.ARCH }}.sh \
+          -q -O /tmp/cmake-install.sh \
+          && chmod u+x /tmp/cmake-install.sh \
+          && mkdir /opt/cmake-3.25.3 \
+          && /tmp/cmake-install.sh --skip-license --prefix=/opt/cmake-3.25.3 \
+          && rm /tmp/cmake-install.sh \
+          && ln -sf /opt/cmake-3.25.3/bin/* /usr/local/bin
+      - name: Install GNU Arm Embedded Toolchain
+        run: |
+          cd /tmp/ \
+          && wget ${{ env.ARM_GCC_URL }} \
+          && tar -xf arm-gnu-toolchain-12.2.rel1-${{ env.ARCH }}-arm-none-eabi.tar.xz \
+          && mv arm-gnu-toolchain-12.2.rel1-${{ env.ARCH }}-arm-none-eabi /opt/gcc-arm-none-eabi \
+          && rm arm-gnu-toolchain-12.2.rel-${{ env.ARCH }}-arm-none-eabi -rf
+      - name: Simplicity Commander
+        run: |
+          wget https://www.silabs.com/documents/login/software/SimplicityCommander-Linux.zip \
+          && unzip SimplicityCommander-Linux.zip \
+          &&  tar -xf SimplicityCommander-Linux/Commander-cli_linux_${{ env.ARCH }}_*.tar.bz \
+          && mv commander-cli /opt/commander-cli \
+          && rm -rf SimplicityCommander-Linux.zip SimplicityCommander-Linux
+      - name: Build the project
+        run: |
+          cd ${{ github.workspace}} \
+          && make all
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4.4.3
+        with:
+          name: build-artifacts-${{ github.run_number }}
+          path: |
+            locator_ncp/build/locator_ncp.s37
+            locator_host/build/locator_host.s37
+          retention-days: 1
