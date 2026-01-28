@@ -23,7 +23,7 @@ set OTA_APPLO_NAME=apploader
 set OTA_APPLI_NAME=application
 set UARTDFU_FULL_NAME=full
 
-:: names of the sign and encypt key files
+:: names of the sign and encrypt key files
 set GBL_SIGING_KEY_FILE=app-sign-key.pem
 set GBL_ENCRYPT_KEY_FILE=app-encrypt-key.txt
 
