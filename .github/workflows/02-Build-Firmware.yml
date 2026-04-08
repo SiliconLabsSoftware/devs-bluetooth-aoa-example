@@ -16,7 +16,7 @@ jobs:
             - name: Trigger
               run: echo "Triggered by ${{ github.event_name }} event"
             - name: Checkout
-              uses: actions/checkout@v4.2.2
+              uses: actions/checkout@v6
             - name: Install Dependencies
               run: |
                   sudo apt-get update && \
@@ -66,7 +66,7 @@ jobs:
                cd ${{ github.workspace}} \
                && make all
             - name: Upload Build Artifacts
-              uses: actions/upload-artifact@v4.4.3
+              uses: actions/upload-artifact@v6
               with:
                 name: build-artifacts-${{ github.run_number }}
                 path: |

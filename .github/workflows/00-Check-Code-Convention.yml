@@ -28,7 +28,7 @@ jobs:
             fi
           fi
       - name: Checkout
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v6
         with:
           ref: "${{ github.event_name == 'workflow_dispatch' && github.event.inputs.branch || github.ref }}"
           submodules: true
